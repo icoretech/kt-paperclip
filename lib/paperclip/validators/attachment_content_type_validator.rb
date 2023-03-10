@@ -16,11 +16,7 @@ module Paperclip
       def validate_each(record, attribute, value)
         base_attribute = attribute.to_sym
         attribute = "#{attribute}_content_type".to_sym
-        if Rails::VERSION::MAJOR >= 7
-          value = record._read_attribute(attribute)
-        else
-          value = record.read_attribute_for_validation(attribute)
-        end
+        value = record.read_attribute_for_validation(attribute)
 
         return if (value.nil? && options[:allow_nil]) || (value.blank? && options[:allow_blank])
 
