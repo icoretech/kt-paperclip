@@ -17,9 +17,9 @@ module Paperclip
         base_attribute = attribute.to_sym
         attribute = "#{attribute}_content_type".to_sym
         if Rails::VERSION::MAJOR >= 7
-          value = record.read_attribute_for_validation(attribute)
+          value = record._read_attribute(attribute)
         else
-          value = record.send :read_attribute_for_validation, attribute
+          value = record.read_attribute_for_validation(attribute)
         end
 
         return if (value.nil? && options[:allow_nil]) || (value.blank? && options[:allow_blank])
